@@ -19,6 +19,7 @@ class Book(models.Model):
 	title = models.CharField(max_length=200, verbose_name='Название')
 	description = models.TextField(blank=True, verbose_name='Описание')
 	publish_date = models.IntegerField(verbose_name='Дата публикации')
+	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	book_author = models.ForeignKey(Author, on_delete=models.CASCADE)
 
 	class Meta:
