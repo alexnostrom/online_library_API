@@ -21,12 +21,12 @@ from books.views import AddBookOrGetAllBooksViewSet, AuthorsAPIViewSet, BookAPID
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
-	path('register/', view=registerUser, name='register'),
-	path('login/', view=MyTokenObtainPairView.as_view(), name='login'),
-	path('books/', AddBookOrGetAllBooksViewSet.as_view({'get': 'list', 'post': 'create'}), name='books'),
-	path('books/<int:pk>/', BookAPIDetailViewSet.as_view({'get': 'list', 'put': 'update', 'delete': 'destroy'})),
-	path('authors/', AuthorsAPIViewSet.as_view({'get': 'list'}), name='authors'),
-	path('books/<int:book_id>/review/<int:pk>/', ReviewAPIDeleteViewSet.as_view()),
-	path('books/<int:book_id>/review/', ReviewCreate.as_view()),
+	path('api/register/', view=registerUser, name='register'),
+	path('api/login/', view=MyTokenObtainPairView.as_view(), name='login'),
+	path('api/books/', AddBookOrGetAllBooksViewSet.as_view({'get': 'list', 'post': 'create'}), name='books'),
+	path('api/books/<int:pk>/', BookAPIDetailViewSet.as_view({'get': 'list', 'put': 'update', 'delete': 'destroy'})),
+	path('api/authors/', AuthorsAPIViewSet.as_view({'get': 'list'}), name='authors'),
+	path('api/books/<int:book_id>/review/<int:pk>/', ReviewAPIDeleteViewSet.as_view()),
+	path('api/books/<int:book_id>/review/', ReviewCreate.as_view()),
 
 ]
