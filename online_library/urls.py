@@ -15,16 +15,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
-from books.views import BookAPIList, BookAPIDetail, AuthorsAPI, ReviewAPI
+from django.urls import path
+from books.views import AddBookOrGetAllBooksViewSet, AuthorsAPIViewSet, BookAPIDetailViewSet, registerUser, \
+	MyTokenObtainPairView, ReviewAPIDeleteViewSet, ReviewCreate
 
 urlpatterns = [
 	path('admin/', admin.site.urls),
-	path('auth/', include('djoser.urls')),
-	path('auth/', include('djoser.urls.authtoken')),
-	path('auth/', include('djoser.urls.jwt')),
-	path('books/', BookAPIList.as_view()),
-	path('books/<int:pk>/', BookAPIDetail.as_view()),
-	path('authors/', AuthorsAPI.as_view()),
-	path('books/<int:pk>/review/', ReviewAPI.as_view()),
+	path('register/', view=registerUser, name='register'),
+	path('login/', view=MyTokenObtainPairView.as_view(), name='login'),
+	path('books/', AddBookOrGetAllBooksViewSet.as_view({'get': 'list', 'post': 'create'}), name='books'),
+	path('books/<int:pk>/', BookAPIDetailViewSet.as_view({'get': 'list', 'put': 'update', 'delete': 'destroy'})),
+	path('authors/', AuthorsAPIViewSet.as_view({'get': 'list'}), name='authors'),
+	path('books/<int:book_id>/review/<int:pk>/', ReviewAPIDeleteViewSet.as_view()),
+	path('books/<int:book_id>/review/', ReviewCreate.as_view()),
+
 ]

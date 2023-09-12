@@ -123,9 +123,9 @@ REST_FRAMEWORK = {
 		'rest_framework.renderers.JSONRenderer',
 		'rest_framework.renderers.BrowsableAPIRenderer',
 	],
-	'DEFAULT_PERMISSION_CLASSES': [
-		'rest_framework.permissions.IsAuthenticated',
-	],
+	# 'DEFAULT_PERMISSION_CLASSES': [
+	# 	'rest_framework.permissions.IsAuthenticated',
+	# ],
 	'DEFAULT_AUTHENTICATION_CLASSES': [
 		'rest_framework.authentication.BasicAuthentication',
 		'rest_framework.authentication.SessionAuthentication',
@@ -134,6 +134,7 @@ REST_FRAMEWORK = {
 
 	],
 }
+
 
 SIMPLE_JWT = {
 	"ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),

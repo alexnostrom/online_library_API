@@ -16,11 +16,11 @@ class Author(models.Model):
 
 
 class Book(models.Model):
-	title = models.CharField(max_length=200, verbose_name='Название')
+	title = models.CharField(max_length=200, verbose_name='Название', unique=True)
 	description = models.TextField(blank=True, verbose_name='Описание')
 	publish_date = models.IntegerField(verbose_name='Дата публикации')
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	book_author = models.ForeignKey(Author, on_delete=models.CASCADE)
+	book_author = models.ForeignKey(Author, on_delete=models.CASCADE, verbose_name='Автор книги', related_name='author')
 
 	class Meta:
 		verbose_name = 'Книга'
@@ -36,7 +36,7 @@ class Review(models.Model):
 	rating = models.IntegerField(verbose_name='Рейтинг')
 	review_date = models.DateTimeField(auto_now=True, verbose_name='Дата публикации')
 	user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
-	book = models.ForeignKey(Book, verbose_name='Книга', on_delete=models.PROTECT)
+	book = models.ForeignKey(Book, verbose_name='Книга', on_delete=models.PROTECT, related_name="reviews")
 
 	class Meta:
 		verbose_name = 'Описание'
